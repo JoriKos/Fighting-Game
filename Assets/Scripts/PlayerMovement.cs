@@ -6,10 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed, jumpHeight, timer;
     private bool canJump;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
         canJump = true;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -27,19 +29,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * movementSpeed * Time.deltaTime);
+            transform.Translate(Vector2.right * movementSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * movementSpeed * Time.deltaTime);
+            transform.Translate(Vector2.left * movementSpeed * Time.deltaTime);
         }
 
         if (canJump)
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                transform.Translate(Vector3.up * jumpHeight * Time.deltaTime);
+                rb.AddForce(Vector2.up * jumpHeight);
                 canJump = false;
             }
         }
