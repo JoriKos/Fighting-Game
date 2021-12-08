@@ -15,4 +15,10 @@ public class Stats : MonoBehaviour
     {
         return health;
     }
+
+    public void TakeDamage(int damageTaken, GameObject uselessObject)
+    {
+        health -= damageTaken;
+    }
+    
 }
