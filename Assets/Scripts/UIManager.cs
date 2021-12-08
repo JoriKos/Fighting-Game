@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform playerHealthBar, enemyHealthBar; //Used to deplete bar
     [SerializeField] private Stats playerStats, enemyStats;
     private Vector2 barReduction;
-    private float currentWidth;
 
     private void Awake()
     {
@@ -24,15 +23,14 @@ public class UIManager : MonoBehaviour
         
         if (gameObjectToDamage == playerStats.gameObject) //Player
         {
-            currentWidth = playerHealthBar.sizeDelta.x;
-            //playerHealthBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, currentWidth -= barReduction.x); This don't work!!!!!!
             playerHealthBar.sizeDelta -= barReduction;
+            playerHealthBar.localPosition = new Vector2(playerHealthBar.localPosition.x - 23.5f, playerHealthBar.localPosition.y);
         }
         
         if (gameObjectToDamage == enemyStats.gameObject) //Enemy
         {
-            currentWidth = enemyHealthBar.sizeDelta.x;
             enemyHealthBar.sizeDelta -= barReduction;
+            enemyHealthBar.localPosition = new Vector2(enemyHealthBar.localPosition.x + 23.5f, enemyHealthBar.localPosition.y);
         }
     }
 }
