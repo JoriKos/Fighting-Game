@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PlayerFight : MonoBehaviour
 {
-    [SerializeField] private int damage;
     [SerializeField] private float timer, timer2, attackCooldown, attackDuration;
     private CapsuleCollider2D attackCollider;
     private bool canAttack, timerStart;
 
     private void Awake()
     {
-        attackCollider = GetComponent<CapsuleCollider2D>();
+        attackCollider = GetComponentInChildren<CapsuleCollider2D>();
         attackCollider.enabled = false;
         canAttack = true;
     }
@@ -53,10 +52,5 @@ public class PlayerFight : MonoBehaviour
     {
         attackCollider.enabled = true;
         timerStart = true;
-    }
-
-    public int GetDamage()
-    {
-        return damage;
     }
 }

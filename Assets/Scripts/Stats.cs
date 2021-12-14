@@ -6,6 +6,11 @@ public class Stats : MonoBehaviour
 {
     [SerializeField] private int damage, health;
 
+    private void Update()
+    {
+        Debug.Log(health);
+    }
+
     public int GetDamage()
     {
         return damage;
@@ -18,7 +23,7 @@ public class Stats : MonoBehaviour
 
     public void TakeDamage(int damageTaken, GameObject uselessObject)
     {
-        health -= damageTaken;
+        this.health -= damageTaken;
     }
     
 }

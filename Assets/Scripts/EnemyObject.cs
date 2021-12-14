@@ -3,38 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class UnityEventInt : UnityEvent<int, GameObject>
-{
-
-}
-
 public class EnemyObject : MonoBehaviour
 {
-    [SerializeField] private Stats statistics, playerStats;
+    [SerializeField] private int health, damage;
     [SerializeField] private GameManager manager;
-    [SerializeField] private UnityEventInt damageTakenEvent;
+    [SerializeField] private PlayerObject player;
 
     private void Awake()
     {
-        playerStats = GameObject.Find("Player").GetComponent<Stats>();
+        player = GameObject.Find("Player").GetComponent<PlayerObject>();
         manager = GameObject.Find("Manager").GetComponent<GameManager>();
-        statistics = playerStats.GetComponent<Stats>();
     }
 
     private void Update()
     {
-        if (statistics.GetHealth() <= 0) //If health = 0, die
+        if (health <= 0) //If health = 0, die
         {
             manager.Kill(this.gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) //If entering player hitbox, take damage
+    public int GetHealth()
     {
-        if (collision.name == "Player")
-        {
-            damageTakenEvent.Invoke(playerStats.GetDamage(), this.gameObject);
-        }
+        return health;
+    }
+    public int GetDamage()
+    {
+        return damage;
+    }
+    
+    public void TakeDamage(int tempHealth)
+    {
+        health -= tempHealth;
     }
 }
