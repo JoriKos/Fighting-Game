@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     //State machine. States: Attack, approach, retreat
-    [SerializeField] private float timer, timer2, stateTimer, stateDuration, attackCooldown, attackDuration, playerX;
+    [SerializeField] private float timer, timer2, stateTimer, stateDuration, attackCooldown, attackDuration, playerX, movementSpeed;
     private GameObject player;
     private CapsuleCollider2D attackCollider;
     private bool canAttack, timerStart;
@@ -17,12 +17,13 @@ public class EnemyAI : MonoBehaviour
         attackCollider = GetComponentInChildren<CapsuleCollider2D>();
         attackCollider.enabled = false;
         canAttack = true;
-        state = -1;
+        state = 1;
     }
 
     private void Update()
     {
         playerX = player.transform.position.x;
+        Debug.Log(Vector2.Distance(new Vector2(playerX, 0), new Vector2(this.transform.position.x, 0)));
 
         #region State duration
         stateTimer += Time.deltaTime;
@@ -72,15 +73,20 @@ public class EnemyAI : MonoBehaviour
 
     private void Attack()
     {
-        attackCollider.enabled = true;
-        timerStart = true;
+        if (canAttack)
+        {
+            attackCollider.enabled = true;
+            timerStart = true;
+            canAttack = false;
+        }
+        state = 2;
     }
 
     private void Approach()
     {
-        if (playerX + this.transform.position.x > 5)
+        if (Vector2.Distance(new Vector2(playerX, 0), new Vector2(this.transform.position.x, 0)) > 6.9f)
         {
-            transform.Translate(Vector2.left);
+            transform.Translate(Vector2.left * movementSpeed * Time.deltaTime);
         }
         else
         {
@@ -90,6 +96,17 @@ public class EnemyAI : MonoBehaviour
     
     private void Retreat()
     {
-
+        if (Vector2.Distance(new Vector2(playerX, 0), new Vector2(this.transform.position.x, 0)) > 7f || Vector2.Distance(new Vector2(playerX, 0), new Vector2(this.transform.position.x, 0)) < 18f)
+        {
+            transform.Translate(Vector2.right * movementSpeed * Time.deltaTime);
+            if (Vector2.Distance(new Vector2(playerX, 0), new Vector2(this.transform.position.x, 0)) > 18f)
+            {
+                state = 1;
+            }
+        }
+        else
+        {
+            state = 1;
+        }
     }
 }
