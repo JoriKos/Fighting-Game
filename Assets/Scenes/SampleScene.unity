@@ -1033,9 +1033,9 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 5
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &1232394120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,9 +1269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71299c4b29bf96b40a5961c8f1ca1f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  enemy: {fileID: 0}
   player: {fileID: 0}
+  enemy: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &2016607828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1391,6 @@ GameObject:
   - component: {fileID: 2063235821}
   - component: {fileID: 2063235822}
   - component: {fileID: 2063235824}
-  - component: {fileID: 2063235825}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1458,7 +1457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063235817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.25, y: -2, z: 0}
+  m_LocalPosition: {x: 11.83, y: -2, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1509,7 +1508,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!114 &2063235822
 MonoBehaviour:
@@ -1523,6 +1522,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8ea75e882b11443baca47e862f8f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
+  timer2: 0
+  stateTimer: 0
+  stateDuration: 0
+  attackCooldown: 0
+  attackDuration: 0
+  playerX: 0
 --- !u!114 &2063235824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,19 +1545,3 @@ MonoBehaviour:
   damage: 5
   manager: {fileID: 0}
   player: {fileID: 0}
---- !u!70 &2063235825
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063235817}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.6500024, y: -0.004803784}
-  m_Size: {x: 0.5000051, y: 0.5000051}
-  m_Direction: 1
